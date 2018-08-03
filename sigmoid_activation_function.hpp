@@ -7,35 +7,35 @@
 struct sigmoid_activation_function : public interface_activation_function<sigmoid_activation_function>
 {
 #pragma region Data
-    private: double _coeff;
+    private: double _coeficient;
 #pragma endregion
 
 #pragma region Ctor/Dtor/op=
-    public: sigmoid_activation_function(double coeff):
-        _coeff{coeff}
+    public: sigmoid_activation_function(const double coeficient):
+        _coeficient{coeficient}
     {
     }
 
-    public: sigmoid_activation_function(const sigmoid_activation_function& saf) = default;
-    public: sigmoid_activation_function& operator=(const sigmoid_activation_function& saf) = default;
+    public: sigmoid_activation_function(const sigmoid_activation_function&  saf) = default;
+    public: sigmoid_activation_function(      sigmoid_activation_function&& saf) = default;
 
-    public: sigmoid_activation_function(sigmoid_activation_function&& saf) = default;
-    public: sigmoid_activation_function& operator=(sigmoid_activation_function&& saf) = default;
+    public: func operator=(const sigmoid_activation_function&  saf) -> sigmoid_activation_function& = default;
+    public: func operator=(      sigmoid_activation_function&& saf) -> sigmoid_activation_function& = default;
 
     public: ~sigmoid_activation_function() = default;
 #pragma endregion
 
 #pragma region Implementation
-    public: func calc_activation_function(double input) const -> double
+    public: func calc_activation_function(const double input) const -> double
     {
-        return 1.0 / (1.0 + exp(-input * _coeff));
+        return 1.0 / (1.0 + exp(-input * _coeficient));
     }
 #pragma endregion
 
 #pragma region Observers
     public: func coefficient() const -> double
     {
-        return _coeff;
+        return _coeficient;
     }
 #pragma endregion
 };

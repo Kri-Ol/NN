@@ -9,22 +9,24 @@ struct step_activation_function : public interface_activation_function<step_acti
 #pragma endregion
 
 #pragma region Ctor/Dtor/op=
-    public: step_activation_function(double treshold):
+    public: step_activation_function(const double treshold):
         _threshold{treshold}
     {
     }
 
-    public: step_activation_function(const step_activation_function& saf) = default;
-    public: step_activation_function& operator=(const step_activation_function& saf) = default;
+    public: step_activation_function(const step_activation_function&  taf) = default;
+    public: step_activation_function(      step_activation_function&& taf) = default;
 
-    public: step_activation_function(step_activation_function&& saf) = default;
-    public: step_activation_function& operator=(step_activation_function&& saf) = default;
+    public: func operator=(const step_activation_function&  taf) -> step_activation_function& = default;
+    public: func operator=(      step_activation_function&& taf) -> step_activation_function& = default;
+
+    public: ~step_activation_function() = default;
 #pragma endregion
 
 #pragma region Implementation
-    public: func calc_activation_function(double input) const -> double
+    public: func calc_activation_function(const double input) const -> double
     {
-        return input > _threshold ? 1.0 : 0.0;
+        return (input > _threshold) ? 1.0 : 0.0;
     }
 #pragma endregion
 
